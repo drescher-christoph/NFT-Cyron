@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --bg-color: #0a101c;
+  --pattern-color: #0f1731;
+}
+
+/* Custom Fonts */
+.font-space {
+  font-family: 'Space Grotesk', sans-serif;
+}
+.font-satoshi {
+  font-family: 'Satoshi', sans-serif;
+}
+
+.font-inter {
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #0a101c, #130E20);
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./assets/circuit-board.min.svg');
+  background-repeat: repeat;
+  background-size: auto;
+  opacity: 0.2; 
+  z-index: 0;
+  pointer-events: none; 
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
