@@ -1,0 +1,12 @@
+{
+  "name": "ZENITH-03",
+  "description": "ZENITH-03 channels balance — white cloak, calm green optics, and a serene pastel green backdrop.",
+  "image": "ipfs://bafybeid4y2mwu4tocomze7k4do7sybwmiz6kacfjverx3vwzniowdapryi/3.png",
+  "attributes": [
+    { "trait_type": "Model", "value": "CYRON Series" },
+    { "trait_type": "Hoodie Color", "value": "White" },
+    { "trait_type": "Eye Glow", "value": "Green" },
+    { "trait_type": "Head Detail", "value": "Mechanical Jaw" },
+    { "trait_type": "Background", "value": "Pastel Green" }
+  ]
+}

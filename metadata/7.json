@@ -1,0 +1,12 @@
+{
+  "name": "BRONIX-07",
+  "description": "BRONIX-07 moves in silence. With a dark brown cloak and mysterious purple eyes, it scans its environment through a dense grey field.",
+  "image": "ipfs://bafybeid4y2mwu4tocomze7k4do7sybwmiz6kacfjverx3vwzniowdapryi/7.png",
+  "attributes": [
+    { "trait_type": "Model", "value": "CYRON Series" },
+    { "trait_type": "Hoodie Color", "value": "Dark Brown" },
+    { "trait_type": "Eye Glow", "value": "Purple" },
+    { "trait_type": "Head Feature", "value": "Side Circuit Pattern" },
+    { "trait_type": "Background", "value": "Dark Grey" }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "LILACOR-09",
+  "description": "LILACOR-09 is the subtle observer. Cloaked in lavender, blinking in magenta, framed by a faded beige realm.",
+  "image": "ipfs://bafybeid4y2mwu4tocomze7k4do7sybwmiz6kacfjverx3vwzniowdapryi/9.png",
+  "attributes": [
+    { "trait_type": "Model", "value": "CYRON Series" },
+    { "trait_type": "Hoodie Color", "value": "Lavender" },
+    { "trait_type": "Eye Glow", "value": "Magenta" },
+    { "trait_type": "Antenna Detail", "value": "Blinking Lights" },
+    { "trait_type": "Background", "value": "Beige" }
+  ]
+}

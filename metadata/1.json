@@ -1,0 +1,12 @@
+{
+  "name": "CYRON-01",
+  "description": "CYRON-01 is the original prototype — the neutral node in the machine collective. Fully focused, with cyan sensor eyes and a sterile light-blue background.",
+  "image": "ipfs://bafybeid4y2mwu4tocomze7k4do7sybwmiz6kacfjverx3vwzniowdapryi/1.png",
+  "attributes": [
+    { "trait_type": "Model", "value": "CYRON Series" },
+    { "trait_type": "Hoodie Color", "value": "Grey" },
+    { "trait_type": "Eye Glow", "value": "Cyan" },
+    { "trait_type": "Expression", "value": "Neutral" },
+    { "trait_type": "Background", "value": "Pastel Blue" }
+  ]
+}

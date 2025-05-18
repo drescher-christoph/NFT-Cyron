@@ -1,0 +1,12 @@
+{
+  "name": "SOLARIX-08",
+  "description": "SOLARIX-08 is the bright flare in the dark code. Orange robe, yellow optics, and an ancient glowing symbol at the front.",
+  "image": "ipfs://bafybeid4y2mwu4tocomze7k4do7sybwmiz6kacfjverx3vwzniowdapryi/8.png",
+  "attributes": [
+    { "trait_type": "Model", "value": "CYRON Series" },
+    { "trait_type": "Hoodie Color", "value": "Orange" },
+    { "trait_type": "Eye Glow", "value": "Yellow" },
+    { "trait_type": "Forehead Detail", "value": "Glowing Symbol" },
+    { "trait_type": "Background", "value": "Muted Teal" }
+  ]
+}
