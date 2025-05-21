@@ -4,7 +4,6 @@ import MintCard from "../components/MintCard";
 const MintSection = () => {
   return (
     <section className="flex flex-col items-center justify-center h-[80%] px-4 pb-20 text-white">
-      {/* Titelbereich */}
       <div className="text-center mb-12">
         <h2 className="text-5xl font-extrabold tracking-wide bg-gradient-to-r from-cyan-300 via-blue-500 to-purple-500 text-transparent bg-clip-text uppercase font-space">
           Cyron
@@ -14,7 +13,6 @@ const MintSection = () => {
         </p>
       </div>
 
-      {/* MintCard Komponente */}
       <MintCard />
     </section>
   );

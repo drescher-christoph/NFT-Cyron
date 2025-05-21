@@ -1,8 +1,48 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useAccount, useReadContract, useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 
-const MintButton = () => {
+const MintButton = ({handleTxState}) => {
+  
+  const account = useAccount();
+
+  const {
+    data: hash,
+    writeContract,
+    isPending: isWritPending,
+    error: writeError
+  } = useWriteContract();
+
+  const {
+    data: receipt,
+    isLoading: isConfirming,
+    isSuccess,
+    isError: isTransactionError,
+    error: transactionError
+  } = useWaitForTransactionReceipt({hash})
+
+  useEffect(() => {
+    if (isWritPending) {
+      handleTxState("signing");
+    } else if (hash && isConfirming) {
+      handleTxState("confirming");
+    } else if (hash && isSuccess) {
+      handleTxState("success");
+    } else if (writeError || isTransactionError) {
+      handleTxState("failed")
+    }
+  }, [])
+
+  const mint = async() => {
+    
+  }
+
   return (
-    <button class="
+    <>
+      {account.address === undefined ? (
+        <p>Please connect your wallet to mint</p>
+      ) : (
+        <button
+          class="
       px-8 py-4
       bg-gradient-to-r from-blue-500 to-purple-600
       backdrop-blur-lg
@@ -18,9 +58,11 @@ const MintButton = () => {
       relative
       overflow-hidden
       group
-    ">
-      <span class="relative z-10">Mint 0.01ETH</span>
-      <div class="
+    "
+        >
+          <span class="relative z-10">Mint 0.01ETH</span>
+          <div
+            class="
         absolute
         inset-0
         bg-gradient-to-r from-blue-500/30 to-purple-600/30
@@ -28,9 +70,12 @@ const MintButton = () => {
         group-hover:opacity-100
         transition-opacity
         duration-300
-      "></div>
-    </button>
-  )
-}
+      "
+          ></div>
+        </button>
+      )}
+    </>
+  );
+};
 
-export default MintButton
+export default MintButton;

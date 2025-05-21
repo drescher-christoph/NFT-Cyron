@@ -28,4 +28,13 @@ contract CyronMinter is ERC721A, Ownable {
     function setBaseURI(string memory _newBaseURI) external onlyOwner {
         baseTokenURI = _newBaseURI;
     }
+
+    function withdraw() external onlyOwner {
+        (bool success, ) = payable(owner()).call{value: address(this).balance}("");
+        require(success, "Withdraw failed!");
+    }
+
+    function getTotalSupplyAndMaxSupply() public view returns (uint256, uint256) {
+        return (totalSupply(), MAX_SUPPLY);
+    }
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import preview from "../../../images/2.png"
 import MintCounter from './MintCounter'
 import MintButton from './MintButton'
@@ -24,11 +24,18 @@ const images = [
   ]
 
 const MintCard = () => {
+
+  const [txState, setTxState] = useState("initial");
+
+  const handleTxState = (state) => {
+    setTxState(state)
+  }
+
   return (
     <div className="flex flex-col items-center justify-center gap-6 p-6 rounded-2xl bg-gradient-to-b from-[#0a101c] to-[#0e1525] border-2 border-white/10 w-full max-w-md shadow-md transition-transform hover:scale-[1.02] hover:border-white duration-200">
       <ImageCarousel  images={images}/>
       <MintCounter />
-      <MintButton />
+      <MintButton handleTxState={handleTxState} />
     </div>
   );
 };

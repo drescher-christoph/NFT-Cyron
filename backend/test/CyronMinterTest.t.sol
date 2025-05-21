@@ -54,4 +54,43 @@ contract CyronMinterTest is Test {
         minter.mint{value: 0.001 ether}();
         vm.stopPrank();
     }
+
+    function testWithdraw() public {
+        vm.startPrank(user1);
+        vm.deal(user1, 2 ether);
+        minter.mint{value: 0.01 ether}();
+        minter.mint{value: 0.01 ether}();
+        vm.stopPrank();
+
+        vm.deal(user2, 2 ether);
+        minter.mint{value: 0.01 ether}();
+        minter.mint{value: 0.01 ether}();
+        vm.stopPrank();
+
+        uint256 balance = address(minter).balance;
+
+        vm.startPrank(owner);
+        minter.withdraw();
+        vm.stopPrank();
+
+        assertEq(address(minter).balance, 0);
+        assertEq(address(owner).balance, balance);
+    }
+
+    function testGetTotalSupplyAndMaxSupply() public {
+        vm.startPrank(user1);
+        vm.deal(user1, 2 ether);
+        minter.mint{value: 0.01 ether}();
+        minter.mint{value: 0.01 ether}();
+        vm.stopPrank();
+
+        vm.deal(user2, 2 ether);
+        minter.mint{value: 0.01 ether}();
+        minter.mint{value: 0.01 ether}();
+        vm.stopPrank();
+
+        (uint256 total, uint256 max) = minter.getTotalSupplyAndMaxSupply();
+        assertEq(total, 4);
+        assertEq(max, 10);
+    }
 }
