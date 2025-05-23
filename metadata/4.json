@@ -1,7 +1,7 @@
 {
   "name": "FERRON-04",
   "description": "FERRON-04 is a war-damaged guardian, wearing red and exposing internal mechanics through a cracked mask.",
-  "image": "ipfs://bafybeid4y2mwu4tocomze7k4do7sybwmiz6kacfjverx3vwzniowdapryi/4.png",
+  "image": "https://gray-accurate-pony-238.mypinata.cloud/ipfs/bafybeid4y2mwu4tocomze7k4do7sybwmiz6kacfjverx3vwzniowdapryi/4.png",
   "attributes": [
     { "trait_type": "Model", "value": "CYRON Series" },
     { "trait_type": "Hoodie Color", "value": "Red" },

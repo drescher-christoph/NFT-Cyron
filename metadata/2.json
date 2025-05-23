@@ -1,7 +1,7 @@
 {
   "name": "VANTA-02",
   "description": "VANTA-02 is the silent shadow of the net — cloaked in black, with burning red optics and a pastel purple grid behind.",
-  "image": "ipfs://bafybeid4y2mwu4tocomze7k4do7sybwmiz6kacfjverx3vwzniowdapryi/2.png",
+  "image": "https://gray-accurate-pony-238.mypinata.cloud/ipfs/bafybeid4y2mwu4tocomze7k4do7sybwmiz6kacfjverx3vwzniowdapryi/2.png",
   "attributes": [
     { "trait_type": "Model", "value": "CYRON Series" },
     { "trait_type": "Hoodie Color", "value": "Black" },

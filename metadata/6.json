@@ -1,7 +1,7 @@
 {
   "name": "LUMEX-06",
   "description": "LUMEX-06 is a green-suited sentinel with calm blue sensors. Known for its slightly bent antenna and gentle pink backdrop.",
-  "image": "ipfs://bafybeid4y2mwu4tocomze7k4do7sybwmiz6kacfjverx3vwzniowdapryi/6.png",
+  "image": "https://gray-accurate-pony-238.mypinata.cloud/ipfs/bafybeid4y2mwu4tocomze7k4do7sybwmiz6kacfjverx3vwzniowdapryi/6.png",
   "attributes": [
     { "trait_type": "Model", "value": "CYRON Series" },
     { "trait_type": "Hoodie Color", "value": "Green" },

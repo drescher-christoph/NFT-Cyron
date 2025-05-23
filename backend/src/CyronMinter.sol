@@ -25,6 +25,11 @@ contract CyronMinter is ERC721A, Ownable {
         return baseTokenURI;
     }
 
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
+        return string(abi.encodePacked(baseTokenURI, _toString(tokenId), ".json"));
+    }
+
     function setBaseURI(string memory _newBaseURI) external onlyOwner {
         baseTokenURI = _newBaseURI;
     }
