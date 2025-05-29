@@ -26,4 +26,4 @@
 
 ## 🌐 Live Demo
 
-[https://nft-cyron.vercel.app](https://nft-cyron.vercel.app) *(pending)*
+[https://nft-cyron.vercel.app/](https://nft-cyron.vercel.app/)
