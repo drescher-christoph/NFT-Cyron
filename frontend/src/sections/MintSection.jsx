@@ -1,26 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MintCard from "../components/MintCard";
 import { useWriteContract } from "wagmi";
 import { CONTRACT_ADDRESS } from "../../constants";
 import { CONTRACT_ABI } from "../../constants";
+import { BASE_TOKEN_URI } from "../../constants";
 
 const MintSection = () => {
-
   const { writeContract } = useWriteContract();
 
   const handleWithdraw = async () => {
     console.log("Withdrawing...");
     try {
-      const {data: response} = writeContract({
+      const { data: response } = writeContract({
         address: CONTRACT_ADDRESS,
         abi: CONTRACT_ABI,
         functionName: "withdraw",
       });
-    }
-    catch (error) {
+    } catch (error) {
       console.log("Error withdrawing: " + error);
     }
-  }
+  };
 
   return (
     <section className="flex flex-col items-center justify-center h-[80%] px-4 pb-20 text-white">
@@ -35,9 +34,15 @@ const MintSection = () => {
 
       <MintCard />
 
-      <div className="flex flex-col items-center justify-center mt-18">
-        <button className="px-6 py-2 text-white rounded-md border-2 border-black bg-purple-600 hover:border-white" onClick={handleWithdraw}>Withdraw</button>
-      </div>
+      {/* <div className="flex flex-col items-center justify-center mt-18">
+        <button
+          className="px-6 py-2 text-white rounded-md border-2 border-black bg-purple-600 hover:border-white"
+          onClick={handleWithdraw}
+        >
+          Withdraw
+        </button>
+      </div> */}
+
     </section>
   );
 };

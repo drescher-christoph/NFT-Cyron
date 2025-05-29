@@ -1,4 +1,6 @@
-export const CONTRACT_ADDRESS = "0xE229c113228cbE714b8C629e3F483aeCF8943750";
+export const CONTRACT_ADDRESS = "0x467323007F70930521B5fB6f3fF4753b1650A17A";
+export const BASE_TOKEN_URI =
+  "https://gray-accurate-pony-238.mypinata.cloud/ipfs/bafybeicwyuop4ts5yajlgdh6wgvs6ivjfcc3cfcxc2fsdrrpe3la7tqaqy";
 export const CONTRACT_ABI = [
   {
     type: "constructor",
@@ -261,6 +263,20 @@ export const CONTRACT_ABI = [
       },
       { name: "from", type: "address", indexed: true, internalType: "address" },
       { name: "to", type: "address", indexed: true, internalType: "address" },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Minted",
+    inputs: [
+      { name: "to", type: "address", indexed: true, internalType: "address" },
+      {
+        name: "tokenId",
+        type: "uint256",
+        indexed: true,
+        internalType: "uint256",
+      },
     ],
     anonymous: false,
   },

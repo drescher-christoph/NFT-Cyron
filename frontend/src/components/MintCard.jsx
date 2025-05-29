@@ -4,13 +4,16 @@ import {
   useReadContract,
   useWaitForTransactionReceipt,
   useWriteContract,
+  useWatchContractEvent,
 } from "wagmi";
+import { watchContractEvent } from "wagmi/actions";
 import preview from "../../../images/2.png";
 import MintCounter from "./MintCounter";
 import MintButton from "./MintButton";
 import CyberSpinner from "./CyberSpinner";
 import { CONTRACT_ADDRESS } from "../../constants";
 import { CONTRACT_ABI } from "../../constants";
+import { BASE_TOKEN_URI } from "../../constants";
 import ImageCarousel from "./ImageCarousel";
 import { ethers } from "ethers";
 
@@ -35,8 +38,13 @@ const images = [
 ];
 
 const MintCard = () => {
-  
   const [txState, setTxState] = useState("initial"); // "initial" | "signing" | "pending" | "success" | "failed"
+  const [mintedTokenId, setMintedTokenId] = useState(null);
+
+  // After mint
+  const [imageUrl, setImageUrl] = useState(null);
+  const [tokenName, setTokenName] = useState("");
+  const [tokenDescription, setTokenDescription] = useState("");
 
   const account = useAccount();
 
@@ -52,6 +60,23 @@ const MintCard = () => {
     isSuccess,
     isError: isTransactionError,
   } = useWaitForTransactionReceipt({ hash });
+
+  useWatchContractEvent({
+    address: CONTRACT_ADDRESS,
+    abi: CONTRACT_ABI,
+    eventName: "Minted",
+    once: true,
+    onLogs(logs) {
+      console.log("Minted event logs:", logs);
+      logs.forEach((log) => {
+        const minter = log.args?.minter;
+        const tokenId = log.args?.tokenId;
+
+        console.log(`🎉 Token mintet! ID: ${tokenId}, by: ${minter}`);
+        setMintedTokenId(Number(tokenId));
+      });
+    },
+  });
 
   const mint = async () => {
     console.log("Minting...");
@@ -75,6 +100,25 @@ const MintCard = () => {
     if (writeError || isTransactionError) setTxState("failed");
   }, [isWritePending, isConfirming, isSuccess, writeError, isTransactionError]);
 
+  useEffect(() => {
+    console.log("Going to fetch token name and image for minted token ID:", mintedTokenId);
+      const getTokenNameAndImage = async () => {
+      try {
+        const uri = `${BASE_TOKEN_URI}/${mintedTokenId}.json`;
+        const res = await fetch(uri);
+        const data = await res.json();
+        setTokenName(data.name);
+        setImageUrl(data.image.replace("ipfs://", "https://gray-accurate-pony-238.mypinata.cloud/ipfs/"));
+        console.log("Token Name:", data.name);
+        console.log("Token Image:", data.image);
+      } catch (error) {
+        console.error("Error fetching token name:", error);
+      }
+    };
+  
+    getTokenNameAndImage();
+    }, [mintedTokenId]);
+
   const renderContent = () => {
     switch (txState) {
       case "initial":
@@ -90,7 +134,7 @@ const MintCard = () => {
       default:
         return null;
     }
-  }
+  };
 
   const renderIntial = () => {
     return (
@@ -106,34 +150,59 @@ const MintCard = () => {
         </button>
       </div>
     );
-  }
+  };
 
   const renderSigning = () => {
     return (
       <div className="flex flex-col items-center justify-center gap-6 p-6 rounded-2xl bg-gradient-to-b from-[#0a101c] to-[#0e1525] border-2 border-white/10 w-full max-w-md shadow-md transition-transform hover:scale-[1.02] hover:border-white duration-200">
         <CyberSpinner />
-        <h2 className="text-2xl font-bold text-white">Signing Transaction...</h2>
-        <p className="text-gray-400">Please confirm the transaction in your wallet.</p>
+        <h2 className="text-2xl font-bold text-white">
+          Signing Transaction...
+        </h2>
+        <p className="text-gray-400">
+          Please confirm the transaction in your wallet.
+        </p>
       </div>
     );
-  }
+  };
   const renderPending = () => {
     return (
       <div className="flex flex-col items-center justify-center gap-6 p-6 rounded-2xl bg-gradient-to-b from-[#0a101c] to-[#0e1525] border-2 border-white/10 w-full max-w-md shadow-md transition-transform hover:scale-[1.02] hover:border-white duration-200">
         <CyberSpinner />
-        <h2 className="text-2xl font-bold text-white">Transaction Pending...</h2>
-        <p className="text-gray-400">Please wait while we process your transaction.</p>
+        <h2 className="text-2xl font-bold text-white">
+          Transaction Pending...
+        </h2>
+        <p className="text-gray-400">
+          Please wait while we process your transaction.
+        </p>
       </div>
     );
-  }
+  };
+
   const renderSuccess = () => {
     return (
       <div className="flex flex-col items-center justify-center gap-6 p-6 rounded-2xl bg-gradient-to-b from-[#0a101c] to-[#0e1525] border-2 border-white/10 w-full max-w-md shadow-md transition-transform hover:scale-[1.02] hover:border-white duration-200">
-        <h2 className="text-2xl font-bold text-white">Transaction Successful!</h2>
+        {tokenName ? (
+          <h3 className="text-2xl font-semibold text-purple-300">
+            Successfully minted {tokenName}
+          </h3>
+        ) : (
+          <h2 className="text-2xl font-bold text-white">
+            Transaction Successful!
+          </h2>
+        )}
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt={`Token ${mintedTokenId}`}
+            className="rounded-md broder-2 border-white"
+          />
+        )}
         <p className="text-gray-400">Your NFT has been minted successfully.</p>
       </div>
     );
-  }
+  };
+
   const renderFailed = () => {
     return (
       <div className="flex flex-col items-center justify-center gap-6 p-6 rounded-2xl bg-gradient-to-b from-[#0a101c] to-[#0e1525] border-2 border-white/10 w-full max-w-md shadow-md transition-transform hover:scale-[1.02] hover:border-white duration-200">
@@ -141,13 +210,9 @@ const MintCard = () => {
         <p className="text-gray-400">Please try again.</p>
       </div>
     );
-  }
+  };
 
-  return (
-    <>
-    {renderContent()}
-    </>
-  );
+  return <>{renderContent()}</>;
 };
 
 export default MintCard;

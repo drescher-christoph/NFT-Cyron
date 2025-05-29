@@ -4,6 +4,8 @@ pragma solidity ^0.8.20;
 import "lib/ERC721A/contracts/ERC721A.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+event Minted(address indexed to, uint256 indexed tokenId);
+
 contract CyronMinter is ERC721A, Ownable {
     uint256 public constant MAX_SUPPLY = 10;
     uint256 public constant MINT_PRICE = 0.01 ether;
@@ -16,9 +18,11 @@ contract CyronMinter is ERC721A, Ownable {
     function mint() external payable {
         require(totalSupply() + 1 <= MAX_SUPPLY, "Max supply reached");
         require(msg.value >= MINT_PRICE, "Insufficient ETH");
-        require(_numberMinted(msg.sender) < 2, "Max mints per wallet reached");
+        require(_numberMinted(msg.sender) < 5, "Max mints per wallet reached");
 
+        uint256 tokenId = _nextTokenId();
         _mint(msg.sender, 1);
+        emit Minted(msg.sender, tokenId); 
     }
     
     function _baseURI() internal view override returns (string memory) {
